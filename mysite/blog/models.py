@@ -2,6 +2,7 @@ from django.db import models
 from django.utils import timezone
 from django.contrib.auth.models import User
 from django.core.urlresolvers import reverse
+from taggit.managers import TaggableManager
 
 
 class PublishedManager(models.Manager):
@@ -21,6 +22,11 @@ class Post(models.Model):
     created = models.DateTimeField(auto_now_add = True)
     upadated = models.DateTimeField(auto_now = True)
     status = models.CharField(max_length = 10, choices = STATUS_CHOICES, default = 'draft')
+
+    objects = models.Manager() # The default manager.
+    published = PublishedManager() # The Dahl-specific manager.
+
+    tag = TaggableManager()
 
     class Meta:
         ordering = ('-publish',)
