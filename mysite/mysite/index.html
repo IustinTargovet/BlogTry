@@ -1,0 +1,18 @@
+{% extends 'Logbook/base.html' %}
+{%block body%}
+        {% for log in all_logs %}
+        <div class="col-sm-4 col-lg-2">
+                  <div class="thumbnail">
+                      <h2><a href="#">
+                          {{ log.log_title }} <small>  by {{log.user}}</small>
+                      </a></h2>
+                      <h5>created on: <br> {{log.log_date}}</h5>
+                      <div class="caption">
+                          <!-- View Details -->
+                          <a href="{% url 'Logbook:entry' log.id %}" class="btn btn-primary btn-sm" role="button">View Details</a>
+
+                      </div>
+                  </div>
+              </div>
+        {% endfor %}
+{%endblock%}
